@@ -1,0 +1,9 @@
+Sam Disbrow
+compile with g++ main.cpp AirportAnimator.cpp -lncurses
+I began the project by making a planeThread method that would board passengers, taxi, takeoff, tour, land, taxi, and deboard. I then added a semaphore for the number of passengers in the airport, with wait and signal. Then I added a semaphore for the runway, waiting and signaling to take it and give it back.
+
+1. All of the planes try to get passengers at the same time, so none reach 10 to take off. Deadlock is reached
+2. All of the planes try to get passengers at the same time, so none reach 10 to take off. Deadlock is reached
+3. All of the planes try to get passengers at the same time, so none reach 10 to take off. Deadlock is reached
+4. The program runs to completion, however, not all planes are able to tour at once. One will always be waiting for one passenger because there is one passenger short from 80 which would allow each plane to have 10 at the same time.
+5. 73. This is enough for each plane to reach 9 and one plane to reach 10, meaning at least one plane will always be able to take off.

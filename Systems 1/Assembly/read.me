@@ -1,0 +1,8 @@
+Sam Disbrow
+My project has a segmentation fault after reading in the inputs. i think this is likely due to an issue with memory allocation somewhere. i think the solution would be to find this memory issue, likely either by combing through the code or tracing the segmentation fault. i tried to trace the issue using print commands, however i found some strange results, particularly that depending on what i attempted to print, I would print a different number of times, which made me wonder if I was causing another issue with my print code, or, what i felt was more likely, that somehow the print command was changing the rest of my code, once again, probably because I overlooked a memory issue. I also found that the segmentation fault seemed to happen during the 'returna' section, but, even when that should not be the first path taken, the code didn't seem to run past the 'je returna' which lead me to think that the issue might be in the way I was converting the input into an int. 
+I started by writing assembly based sudo code based on the GCD algorithm and implimenting it into true assembly. I then wrote the code to prompt for and read in the input, followed by code to convert the int into a string and print it, based on the code we made in class. finally, I implemented the code to transform the string to an int and began debugging.
+Software engineering log:
+11/26: wrote out a first iteration of code to prompt for and read 2 ints, find the gcd for them. Have not tested, I know this will fail as it is all being treated as a string. Need to convert to int and back again.
+12/3: Implemented conversion from int to string and printing
+12/6: Implemented conversion from string to int when reading input
+12/7: Debugging
