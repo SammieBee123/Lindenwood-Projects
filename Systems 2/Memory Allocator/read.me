@@ -1,0 +1,11 @@
+Sam Disbrow
+4/15/25
+Linux
+My program's reflist does not function, I think because I am creating a local variable for my data in alloc, I don't know how else to solve this problem, especially since all of the other values remain consistant. My code also creates a new var when an existing var is allocated. I put
+"if((*it).name==id.value()){
+	ts.list().freeMethod((*it).name);
+}"
+into my code before correcting the name in Grammar.cpp (with an else if for the if (*it).name=="tempVarName") and got seg faults. I tried switching the order of the two, and then traced the seg fault and found that a cout worked before, but not after the freeMethod call, so I traced within this call, and the cout worked right up to the last parenthasis. I tried to think about what might cause this, and while I am sure it has something to do with the itterator now being erased, I can't quite figure it out. I even tried to get fancy by itterating it by one and freeing the previous one so that it would still exist, but this didn't solve the problem.
+
+
+I first created my own parser, but once one was released, I switched to use that to avoid the minor issues my parser was having. Then I created freeList, and it's methods. Last, I worked through grammar.cpp to implement freeList.

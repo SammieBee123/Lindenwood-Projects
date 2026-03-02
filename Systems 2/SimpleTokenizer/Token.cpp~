@@ -1,0 +1,128 @@
+#include "Token.hpp"
+
+using namespace std;
+
+#define ERROR -1
+
+void printToken(int tokType, const std::string &val, std::ostream &os)
+{
+  if (tokType==EOI)
+  {
+    os << "EOI" << endl;
+    return;
+  }
+  switch (tokType)
+    {
+    case ID:
+      os << "ID:    ";
+      break;
+    case INT:
+      os << "INT:   ";
+      break;
+    case MINUS:
+      os << "MINUS: ";
+      break;
+    case PLUS:
+      os << "PLUS:  ";
+      break;
+    case PLUSPLUS:
+      os << "PLUSPLUS: ";
+      break;
+    case MULT:
+      os << "MULT:  ";
+      break;
+    case DIV:
+      os << "DIV:   ";
+      break;
+    default:
+      os << "ERROR: ";
+    }
+
+  os << '[' << val << ']'; 
+}
+
+
+int getToken(istream &is, string &val)
+{
+  static int DFA[8][256];
+  static bool firstCall=true;
+
+  //fill in table
+  if (firstCall){
+    for (int row=0; row<8; row++){
+      for (int col=0; col<256; col++){
+	DFA[row][col]=ERROR;
+      }
+    }
+    // letters
+    //out of 0
+    for (char ch='a'; ch<='z' ;ch++){
+      DFA[0][(int) ch]=1;
+    }
+    for (char ch='A';ch<='A';ch++){
+      DFA[0][(int) ch]=1;
+    }
+    //out of 1
+    for (char ch='a';ch<='z';ch++){
+      DFA[1][(int) ch]=1;
+    }
+    for (char ch='A';ch<='A';ch++){
+      DFA[1][(int) ch]=1;
+    }
+
+
+    //digits
+    //out of 0
+    for (char ch='0';ch<='9';ch++){
+      DFA[0][(int) ch]=2;
+    }
+    //out of 1
+    for (char ch='0';ch<='9';ch++){
+      DFA[1][(int) ch]=1;
+    }
+    //out of 2
+    for (char ch='0';ch<='9';ch++){
+      DFA[2][(int) ch]=2;
+    }
+    //out of 3
+    for (char ch='0';ch<='9';ch++){
+      DFA[3][(int) ch]=2;
+    }
+
+
+    //-, *, /, + out of 0
+    DFA[0]['*']=5;
+    DFA[0]['/']=6;
+    DFA[0]['-']=3;
+    DFA[0]['+']=4;
+    DFA[4]['+']=7;
+    
+    firstCall=false;
+  }
+
+  // skip whiespace
+  char dummy;
+  dummy = is.get();
+  while(isspace(dummy) ){
+    dummy = is.get();
+    }
+  is.unget();
+
+  if (!is){
+    return EOI;
+      }
+  int currState = 0;
+  int prevState = ERROR;
+
+  val = "";
+  while(currState !=ERROR){
+    char ch = is.get();
+    prevState = currState;
+    currState = DFA[currState][(unsigned) ch];
+    if (currState!=ERROR){
+      val += ch;
+    }
+  }
+  is.unget();
+  return prevState;
+}

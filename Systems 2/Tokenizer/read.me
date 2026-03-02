@@ -1,0 +1,12 @@
+1. Sam Disbrow
+2. Linux
+3. I compiled using " g++ -c -ansi -pedantic -std=c++20 Token.cpp main.cpp"
+4. Should run as expected
+5. No known bugs
+6. I started by rewriting the code we already had from class with smaller changes and the correct DFA, then went back and looked at the smaller differences, such as modifying instead of returning the values, moving up in complexity from there. I left the ID's keywords for towards the end because the code could still compile and run without them.
+7. Software programming log:
+
+1/23: Initialized DFA & rewrote code from class to apply here - comments are not ignored, and it currently returns as previous code did, as a return, rather than modifying the object.
+1/24: Worked on comments, fixed returns to modify instead, started to implement line numbers.
+1/27: Made sure ID's were checked for keywords, refined comments and line numbers, fixed major bugs making the code not run properly or even fail to compile.
+1/28: cleaned up code, added comments, fixed smaller bugs, such as skipping tokens and slightly miss counting line numbers in certain situations.
